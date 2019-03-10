@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CharacterCounter.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">simprint (10 Mar, 2019 7:17:00 PM)</a> &gt; <a href="../../index.html" class="el_group">simprint</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.test.simprint.counter</a> &gt; <span class="el_source">CharacterCounter.java</span></div><h1>CharacterCounter.java</h1><pre class="source lang-java linenums">package com.test.simprint.counter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * Class to implement Character Counter
+ * This class will extract data from list and convert each list string
+ * to characters and counting the numbers using map.
+ *
+ */
+public class CharacterCounter extends ACounter{
+
+	
+	
+	
+	
+<span class="fc" id="L20">	public CharacterCounter() {</span>
+<span class="fc" id="L21">	}</span>
+
+
+	/**
+	 * Constructor 
+	 * @param data
+	 */
+<span class="nc" id="L28">	public CharacterCounter(List&lt;String&gt; data) {</span>
+<span class="nc" id="L29">		this.data = data;</span>
+<span class="nc" id="L30">	}</span>
+
+	
+	@Override
+	public Map&lt;String, Integer&gt; process() throws Exception {
+<span class="fc" id="L35">		 List&lt;String&gt; list = new ArrayList&lt;&gt;();</span>
+		 
+<span class="fc" id="L37">		 data.forEach(d-&gt;{</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">			 for(char ch:d.toCharArray()){</span>
+<span class="fc" id="L39">				 int asciValue=(int) ch;</span>
+				 // 48 to 57 for 0...9 , 65 to 90  97 to 122 for a,b....z
+<span class="pc bpc" id="L41" title="1 of 8 branches missed.">				 if((asciValue&gt;=48 &amp;&amp; asciValue &lt;= 57)||(asciValue&gt;=97 &amp;&amp; asciValue &lt;= 122)){</span>
+<span class="fc" id="L42">					 list.add(&quot;&quot;+ch);</span>
+				 }
+				 
+			 }
+		
+<span class="fc" id="L47">		 });</span>
+<span class="fc" id="L48">        Map&lt;String, Integer&gt; counts = (Map&lt;String, Integer&gt;) list.parallelStream().</span>
+<span class="fc" id="L49">            collect(Collectors.toConcurrentMap(</span>
+<span class="fc" id="L50">                w -&gt; w, w -&gt; 1, Integer::sum));</span>
+<span class="fc" id="L51">        System.out.println(counts);</span>
+<span class="fc" id="L52">		return convertToTreeMap(counts);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>simprint (10 Mar, 2019 7:17:00 PM)</div></body></html>

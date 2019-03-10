@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>SimprintTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">simprint (10 Mar, 2019 7:17:00 PM)</a> &gt; <a href="../../index.html" class="el_group">simprint</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.test.simprint</a> &gt; <span class="el_source">SimprintTest.java</span></div><h1>SimprintTest.java</h1><pre class="source lang-java linenums">package com.test.simprint;
+
+import java.util.Map;
+
+import com.test.simprint.counter.ACounter;
+import com.test.simprint.counter.CounterFactory;
+import com.test.simprint.draw.DrawFactory;
+import com.test.simprint.draw.HorizontalBarDraw;
+import com.test.simprint.draw.IDraw;
+import com.test.simprint.reader.FileReaderFactory;
+import com.test.simprint.reader.IFileReader;
+import com.test.simprint.utils.CounterType;
+import com.test.simprint.utils.DrawType;
+import com.test.simprint.utils.FileType;
+
+/**
+ * Main class to test word/character count To run this program, follow below
+ * steps 1. set fileName to a proper absolute path of the file. 2. As of now
+ * this implementation is implemented only for character count, word count not
+ * implemented. 3. Draw is options, hence if you want to draw then create object
+ * of Horizontal draw class and call its draw method.
+ *
+ */
+<span class="nc" id="L24">public class SimprintTest {</span>
+
+	public static void main(String[] args) {
+
+<span class="nc" id="L28">		new SimprintTest().readAndCount(&quot;/coverletter-Java developer.docx&quot;);</span>
+<span class="nc" id="L29">	}</span>
+
+	public void readAndCount(String fileName) {
+
+		try {
+			// create the file reader object for given file name
+<span class="nc" id="L35">			IFileReader fileReader = FileReaderFactory.getFileReader(FileType.getFileType(fileName), fileName);</span>
+
+			// create the counter object for character
+<span class="nc" id="L38">			ACounter counter = CounterFactory.getCounter(CounterType.CHARACTER);</span>
+			// set the character data by reading from file reader
+<span class="nc" id="L40">			counter.setData(fileReader.readAndListData());</span>
+
+			// get the result of counter in nap
+			@SuppressWarnings(&quot;unchecked&quot;)
+<span class="nc" id="L44">			Map&lt;String, Integer&gt; result = counter.process();</span>
+
+			// draw horizontal lines for each count of character
+<span class="nc" id="L47">			IDraw draw = DrawFactory.getDraw(DrawType.HORIZONTAL,result);</span>
+			
+<span class="nc" id="L49">			draw.draw();</span>
+<span class="nc" id="L50">		} catch (Exception e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L52">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L54">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>simprint (10 Mar, 2019 7:17:00 PM)</div></body></html>

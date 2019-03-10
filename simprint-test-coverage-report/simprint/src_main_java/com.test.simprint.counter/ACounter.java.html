@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ACounter.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">simprint (10 Mar, 2019 7:17:00 PM)</a> &gt; <a href="../../index.html" class="el_group">simprint</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.test.simprint.counter</a> &gt; <span class="el_source">ACounter.java</span></div><h1>ACounter.java</h1><pre class="source lang-java linenums">package com.test.simprint.counter;
+
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
+/**
+ * Abstract Class to represent counter to implement either a word counter or character counter etc.
+ *
+ */
+<span class="fc" id="L12">public abstract class ACounter {</span>
+
+	protected List&lt;String&gt; data;
+	
+	/**
+	 * Method to process the data as per the given counter functionality
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings(&quot;rawtypes&quot;)
+	public abstract &lt;K, V&gt; Map process() throws Exception;
+	
+	/**
+	 * Method to sort the Map data by converting hashMap to Tree Map
+	 * @param hashMap
+	 * @return
+	 */
+	 public  &lt;K, V&gt; Map&lt;K, V&gt; convertToTreeMap(Map&lt;K, V&gt; hashMap) 
+	    { 
+	        Map&lt;K, V&gt; 
+<span class="fc" id="L32">	            treeMap = hashMap </span>
+<span class="fc" id="L33">	                          .entrySet() </span>
+<span class="fc" id="L34">	                          .stream() </span>
+<span class="fc" id="L35">	                          .collect( </span>
+	                              Collectors 
+	                                  // Using Collectors, collect the entries 
+	                                  // and convert it into TreeMap 
+<span class="fc" id="L39">	                                  .toMap( </span>
+<span class="fc" id="L40">	                                      Map.Entry::getKey, </span>
+<span class="fc" id="L41">	                                      Map.Entry::getValue, </span>
+<span class="fc" id="L42">	                                      (oldValue, </span>
+	                                       newValue) 
+<span class="nc" id="L44">	                                          -&gt; newValue, </span>
+<span class="fc" id="L45">	                                      TreeMap::new)); </span>
+	        // Return the TreeMap 
+<span class="fc" id="L47">	        return treeMap; </span>
+	    }
+
+
+	public void setData(List&lt;String&gt; data) {
+<span class="fc" id="L52">		this.data = data;</span>
+<span class="fc" id="L53">	} </span>
+	public List&lt;String&gt; getData() {
+<span class="nc" id="L55">		return this.data;</span>
+	} 
+	  
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>simprint (10 Mar, 2019 7:17:00 PM)</div></body></html>
